@@ -3,6 +3,7 @@
 namespace rocketfellows\CountryVatNumberFormatValidator\tests\unit\exceptions;
 
 use rocketfellows\CountryVatNumberFormatValidator\exceptions\InputVatNumberValidatingException;
+use rocketfellows\CountryVatNumberFormatValidator\exceptions\VatNumberValidatingException;
 use Throwable;
 
 class VatNumberValidatingExceptionTest extends InputVatNumberValidatingExceptionTest
