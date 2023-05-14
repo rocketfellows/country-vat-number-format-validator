@@ -25,14 +25,14 @@ class VatNumberFormatValidatorService
      */
     public function validateCountryVatNumber(string $countryCode, string $vatNumber): void
     {
-        $country = $this->getCountryByCountryCode($countryCode);
+        $country = $this->getCountryByCode($countryCode);
     }
 
     /**
      * @throws CountryCodeEmptyException
      * @throws UnknownInputCountryCodeException
      */
-    private function getCountryByCountryCode(string $countryCode): Country
+    private function getCountryByCode(string $countryCode): Country
     {
         try {
             return $this->countryFactory->createByCode($countryCode);
