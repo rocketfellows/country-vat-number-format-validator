@@ -8,8 +8,12 @@ use Throwable;
 
 class CountryCodeEmptyExceptionTest extends InputCountryCodeExceptionTest
 {
-    protected function getExceptionWithFullParameters(string $countryCode, string $message, int $code, ?Throwable $previousException): InputCountryCodeException
-    {
+    protected function getExceptionWithFullParameters(
+        string $countryCode,
+        string $message,
+        int $code,
+        ?Throwable $previousException
+    ): InputCountryCodeException {
         return new CountryCodeEmptyException($countryCode, $message, $code, $previousException);
     }
 

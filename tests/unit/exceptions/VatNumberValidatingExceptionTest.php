@@ -8,8 +8,12 @@ use Throwable;
 
 class VatNumberValidatingExceptionTest extends InputVatNumberValidatingExceptionTest
 {
-    protected function getExceptionWithFullParameters(string $inputValidatingVatNumber, string $message, int $code, ?Throwable $previousException): InputVatNumberValidatingException
-    {
+    protected function getExceptionWithFullParameters(
+        string $inputValidatingVatNumber,
+        string $message,
+        int $code,
+        ?Throwable $previousException
+    ): InputVatNumberValidatingException {
         return new VatNumberValidatingException(
             $inputValidatingVatNumber,
             $message,
