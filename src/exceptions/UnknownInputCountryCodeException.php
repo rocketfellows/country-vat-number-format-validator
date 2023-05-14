@@ -2,6 +2,6 @@
 
 namespace rocketfellows\CountryVatNumberFormatValidator\exceptions;
 
-class UnknownCountryCodeException extends InputCountryCodeException
+class UnknownInputCountryCodeException extends InputCountryCodeException
 {
 }
