@@ -4,6 +4,7 @@ namespace rocketfellows\CountryVatNumberFormatValidator\tests\unit;
 
 use PHPUnit\Framework\TestCase;
 use rocketfellows\CountryVatNumberFormatValidator\exceptions\CountryCodeEmptyException;
+use rocketfellows\CountryVatNumberFormatValidator\VatNumberFormatValidatorService;
 
 /**
  * @group country-vat-number-format-validator-services
