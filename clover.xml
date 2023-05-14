@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1684072719">
-  <project timestamp="1684072719">
+<coverage generated="1684074440">
+  <project timestamp="1684074440">
     <file name="/app/src/VatNumberFormatValidationResult.php">
       <class name="rocketfellows\CountryVatNumberFormatValidator\VatNumberFormatValidationResult" namespace="global">
         <metrics complexity="4" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="6" elements="10" coveredelements="10"/>
@@ -17,6 +17,12 @@
       <line num="41" type="stmt" count="7"/>
       <metrics loc="44" ncloc="36" classes="1" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="6" elements="10" coveredelements="10"/>
     </file>
-    <metrics files="1" loc="44" ncloc="36" classes="1" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="6" elements="10" coveredelements="10"/>
+    <file name="/app/src/exceptions/VatNumberFormatValidatorServiceException.php">
+      <class name="rocketfellows\CountryVatNumberFormatValidator\exceptions\VatNumberFormatValidatorServiceException" namespace="global">
+        <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      </class>
+      <metrics loc="10" ncloc="10" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <metrics files="2" loc="54" ncloc="46" classes="1" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="6" elements="10" coveredelements="10"/>
   </project>
 </coverage>
