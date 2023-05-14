@@ -8,6 +8,7 @@ use PHPUnit\Framework\TestCase;
 use rocketfellows\CountryVatNumberFormatValidator\exceptions\CountryCodeEmptyException;
 use rocketfellows\CountryVatNumberFormatValidator\exceptions\UnknownInputCountryCodeException;
 use rocketfellows\CountryVatNumberFormatValidator\VatNumberFormatValidatorService;
+use rocketfellows\ISOStandard3166Factory\CountryFactory;
 
 /**
  * @group country-vat-number-format-validator-services
