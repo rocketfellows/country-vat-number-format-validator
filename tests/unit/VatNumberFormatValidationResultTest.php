@@ -3,6 +3,7 @@
 namespace rocketfellows\CountryVatNumberFormatValidator\tests\unit;
 
 use PHPUnit\Framework\TestCase;
+use rocketfellows\CountryVatNumberFormatValidator\VatNumberFormatValidationResult;
 
 class VatNumberFormatValidationResultTest extends TestCase
 {
