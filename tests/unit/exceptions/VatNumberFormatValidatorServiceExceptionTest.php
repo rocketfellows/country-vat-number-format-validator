@@ -2,12 +2,21 @@
 
 namespace rocketfellows\CountryVatNumberFormatValidator\tests\unit\exceptions;
 
+use Exception;
 use PHPUnit\Framework\TestCase;
 use rocketfellows\CountryVatNumberFormatValidator\exceptions\VatNumberFormatValidatorServiceException;
 use Throwable;
 
 class VatNumberFormatValidatorServiceExceptionTest extends TestCase
 {
+    public function testVatNumberFormatValidatorServiceExceptionClassImplementation(): void
+    {
+        /** @var Throwable $exception */
+        $exception = $this->getMockForAbstractClass(VatNumberFormatValidatorServiceException::class);
+
+        $this->assertInstanceOf(Exception::class, $exception);
+    }
+
     /**
      * @dataProvider getExceptionWithAllParamsProvidedData
      */
