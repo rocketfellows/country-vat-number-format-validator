@@ -4,6 +4,7 @@ namespace rocketfellows\CountryVatNumberFormatValidator\tests\unit\exceptions;
 
 use Exception;
 use PHPUnit\Framework\TestCase;
+use rocketfellows\CountryVatNumberFormatValidator\exceptions\VatNumberFormatValidatorServiceException;
 use Throwable;
 
 class InputCountryCodeExceptionTest extends TestCase
@@ -111,5 +112,6 @@ class InputCountryCodeExceptionTest extends TestCase
     private function assertExceptionClassImplementation(Throwable $exception): void
     {
         $this->assertInstanceOf(Exception::class, $exception);
+        $this->assertInstanceOf(VatNumberFormatValidatorServiceException::class, $exception);
     }
 }
