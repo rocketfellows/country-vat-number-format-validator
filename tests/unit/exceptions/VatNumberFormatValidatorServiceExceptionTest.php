@@ -17,6 +17,16 @@ class VatNumberFormatValidatorServiceExceptionTest extends TestCase
         $this->assertInstanceOf(Exception::class, $exception);
     }
 
+    public function testVatNumberFormatValidatorServiceExceptionDefaultInit(): void
+    {
+        /** @var Throwable $exception */
+        $exception = $this->getMockForAbstractClass(VatNumberFormatValidatorServiceException::class);
+
+        $this->assertEmpty($exception->getMessage());
+        $this->assertEquals(0, $exception->getCode());
+        $this->assertNull($exception->getPrevious());
+    }
+
     /**
      * @dataProvider getExceptionWithAllParamsProvidedData
      */
