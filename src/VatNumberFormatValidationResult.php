@@ -17,4 +17,9 @@ class VatNumberFormatValidationResult
         $this->passedValidatorsClasses = $passedValidatorsClasses;
         $this->successfullyValidatorClass = $successfullyValidatorClass;
     }
+
+    public function isValid(): bool
+    {
+        return $this->isValid;
+    }
 }
