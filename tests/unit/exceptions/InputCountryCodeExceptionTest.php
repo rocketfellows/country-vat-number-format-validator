@@ -8,8 +8,18 @@ use rocketfellows\CountryVatNumberFormatValidator\exceptions\InputCountryCodeExc
 use rocketfellows\CountryVatNumberFormatValidator\exceptions\VatNumberFormatValidatorServiceException;
 use Throwable;
 
-class InputCountryCodeExceptionTest extends TestCase
+abstract class InputCountryCodeExceptionTest extends TestCase
 {
+    abstract protected function getExceptionWithFullParameters(
+        string $countryCode,
+        string $message,
+        int $code,
+        ?Throwable $previousException
+    ): Throwable;
+    abstract protected function getExceptionWithOnlyInputCountryCodeParameter(
+        string $countryCode
+    ): Throwable;
+
     /**
      * @dataProvider getInputCountryCodeExceptionProvidedData
      */
@@ -19,16 +29,7 @@ class InputCountryCodeExceptionTest extends TestCase
         int $code,
         ?Throwable $previousException
     ): void {
-        /** @var Throwable $exception */
-        $exception = $this->getMockForAbstractClass(
-            InputCountryCodeException::class,
-            [
-                $countryCode,
-                $message,
-                $code,
-                $previousException
-            ]
-        );
+        $exception = $this->getExceptionWithFullParameters($countryCode, $message, $code, $previousException);
 
         $this->assertExceptionClassImplementation($exception);
         $this->assertEquals($countryCode, $exception->getInputCountryCode());
@@ -80,13 +81,7 @@ class InputCountryCodeExceptionTest extends TestCase
      */
     public function testInitExceptionWithOnlyInputCountryCode(string $countryCode): void
     {
-        /** @var Throwable $exception */
-        $exception = $this->getMockForAbstractClass(
-            InputCountryCodeException::class,
-            [
-                $countryCode,
-            ]
-        );
+        $exception = $this->getExceptionWithOnlyInputCountryCodeParameter($countryCode);
 
         $this->assertExceptionClassImplementation($exception);
         $this->assertEquals($countryCode, $exception->getInputCountryCode());
@@ -113,6 +108,7 @@ class InputCountryCodeExceptionTest extends TestCase
     private function assertExceptionClassImplementation(Throwable $exception): void
     {
         $this->assertInstanceOf(Exception::class, $exception);
+        $this->assertInstanceOf(InputCountryCodeException::class, $exception);
         $this->assertInstanceOf(VatNumberFormatValidatorServiceException::class, $exception);
     }
 }
