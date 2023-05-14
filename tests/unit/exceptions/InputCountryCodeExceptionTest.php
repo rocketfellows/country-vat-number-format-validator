@@ -15,10 +15,10 @@ abstract class InputCountryCodeExceptionTest extends TestCase
         string $message,
         int $code,
         ?Throwable $previousException
-    ): Throwable;
+    ): InputCountryCodeException;
     abstract protected function getExceptionWithOnlyInputCountryCodeParameter(
         string $countryCode
-    ): Throwable;
+    ): InputCountryCodeException;
 
     /**
      * @dataProvider getInputCountryCodeExceptionProvidedData
