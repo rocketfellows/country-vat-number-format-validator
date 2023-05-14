@@ -2,6 +2,7 @@
 
 namespace rocketfellows\CountryVatNumberFormatValidator\tests\unit\exceptions;
 
+use Exception;
 use PHPUnit\Framework\TestCase;
 use Throwable;
 
@@ -27,6 +28,7 @@ class InputCountryCodeExceptionTest extends TestCase
             ]
         );
 
+        $this->assertExceptionClassImplementation($exception);
         $this->assertEquals($countryCode, $exception->getInputCountryCode());
         $this->assertEquals($message, $exception->getMessage());
         $this->assertEquals($code, $exception->getCode());
@@ -84,6 +86,7 @@ class InputCountryCodeExceptionTest extends TestCase
             ]
         );
 
+        $this->assertExceptionClassImplementation($exception);
         $this->assertEquals($countryCode, $exception->getInputCountryCode());
         $this->assertEmpty($exception->getMessage());
         $this->assertEquals(0, $exception->getCode());
@@ -103,5 +106,10 @@ class InputCountryCodeExceptionTest extends TestCase
                 'countryCode' => '',
             ],
         ];
+    }
+
+    private function assertExceptionClassImplementation(Throwable $exception): void
+    {
+        $this->assertInstanceOf(Exception::class, $exception);
     }
 }
