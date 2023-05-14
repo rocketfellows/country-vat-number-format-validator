@@ -2,6 +2,7 @@
 
 namespace rocketfellows\CountryVatNumberFormatValidator\tests\unit\exceptions;
 
+use rocketfellows\CountryVatNumberFormatValidator\exceptions\UnknownCountryCodeException;
 use Throwable;
 
 class UnknownCountryCodeExceptionTest extends InputCountryCodeExceptionTest
