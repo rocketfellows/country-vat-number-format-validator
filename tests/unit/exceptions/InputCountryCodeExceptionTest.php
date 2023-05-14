@@ -4,6 +4,7 @@ namespace rocketfellows\CountryVatNumberFormatValidator\tests\unit\exceptions;
 
 use Exception;
 use PHPUnit\Framework\TestCase;
+use rocketfellows\CountryVatNumberFormatValidator\exceptions\InputCountryCodeException;
 use rocketfellows\CountryVatNumberFormatValidator\exceptions\VatNumberFormatValidatorServiceException;
 use Throwable;
 
