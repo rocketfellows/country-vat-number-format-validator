@@ -3,6 +3,7 @@
 namespace rocketfellows\CountryVatNumberFormatValidator\tests\unit;
 
 use PHPUnit\Framework\TestCase;
+use rocketfellows\CountryVatNumberFormatValidator\exceptions\CountryCodeEmptyException;
 
 /**
  * @group country-vat-number-format-validator-services
@@ -19,5 +20,13 @@ class VatNumberFormatValidatorServiceTest extends TestCase
         parent::setUp();
 
         $this->vatNumberFormatValidatorService = new VatNumberFormatValidatorService();
+    }
+
+    public function testValidatorThrowsExceptionCauseInputCountryCodeEmpty(): void
+    {
+        $this->expectException(CountryCodeEmptyException::class);
+        $this->expectExceptionObject(new CountryCodeEmptyException(''));
+
+        $this->vatNumberFormatValidatorService->validateCountryVatNumber('', '');
     }
 }
