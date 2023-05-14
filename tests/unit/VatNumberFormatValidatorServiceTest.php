@@ -2,6 +2,7 @@
 
 namespace rocketfellows\CountryVatNumberFormatValidator\tests\unit;
 
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use rocketfellows\CountryVatNumberFormatValidator\exceptions\CountryCodeEmptyException;
 use rocketfellows\CountryVatNumberFormatValidator\VatNumberFormatValidatorService;
@@ -16,9 +17,16 @@ class VatNumberFormatValidatorServiceTest extends TestCase
      */
     private $vatNumberFormatValidatorService;
 
+    /**
+     * @var CountryFactory|MockObject
+     */
+    private $countryFactory;
+
     protected function setUp(): void
     {
         parent::setUp();
+
+        $this->countryFactory = $this->createMock(CountryFactory::class);
 
         $this->vatNumberFormatValidatorService = new VatNumberFormatValidatorService();
     }
