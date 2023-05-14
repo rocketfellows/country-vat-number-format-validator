@@ -6,6 +6,22 @@ use PHPUnit\Framework\TestCase;
 
 class VatNumberFormatValidationResultTest extends TestCase
 {
+    /**
+     * @dataProvider getVatNumberFormatValidationResultWithRequiredParamsProvidedData
+     */
+    public function testInitVatNumberFormatValidationResultWithRequiredParams(
+        bool $isValid,
+        array $passedValidatorsClasses
+    ): void {
+        $vatNumberFormatValidationResult = new VatNumberFormatValidationResult(
+            $isValid,
+            $passedValidatorsClasses
+        );
+
+        $this->assertEquals($isValid, $vatNumberFormatValidationResult->isValid());
+        $this->assertEquals($passedValidatorsClasses, $vatNumberFormatValidationResult->getPassedValidatorsClasses());
+    }
+
     public function getVatNumberFormatValidationResultWithRequiredParamsProvidedData(): array
     {
         return [
