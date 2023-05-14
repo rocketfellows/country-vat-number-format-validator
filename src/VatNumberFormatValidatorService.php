@@ -13,8 +13,9 @@ class VatNumberFormatValidatorService
 {
     private $countryFactory;
 
-    public function __construct(CountryFactory $countryFactory)
-    {
+    public function __construct(
+        CountryFactory $countryFactory
+    ) {
         $this->countryFactory = $countryFactory;
     }
 
