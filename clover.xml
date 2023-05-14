@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1684100831">
-  <project timestamp="1684100831">
+<coverage generated="1684101295">
+  <project timestamp="1684101295">
     <file name="/app/src/VatNumberFormatValidationResult.php">
       <class name="rocketfellows\CountryVatNumberFormatValidator\VatNumberFormatValidationResult" namespace="global">
         <metrics complexity="4" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="6" elements="10" coveredelements="10"/>
@@ -25,7 +25,7 @@
       <line num="18" type="stmt" count="2"/>
       <line num="26" type="method" name="validateCountryVatNumber" visibility="public" complexity="1" crap="1" count="2"/>
       <line num="28" type="stmt" count="2"/>
-      <line num="35" type="method" name="getCountryByCountryCode" visibility="private" complexity="3" crap="3" count="2"/>
+      <line num="35" type="method" name="getCountryByCode" visibility="private" complexity="3" crap="3" count="2"/>
       <line num="38" type="stmt" count="2"/>
       <line num="39" type="stmt" count="2"/>
       <line num="40" type="stmt" count="1"/>
