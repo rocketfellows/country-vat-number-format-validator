@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1684101295">
-  <project timestamp="1684101295">
+<coverage generated="1684101578">
+  <project timestamp="1684101578">
     <file name="/app/src/VatNumberFormatValidationResult.php">
       <class name="rocketfellows\CountryVatNumberFormatValidator\VatNumberFormatValidationResult" namespace="global">
         <metrics complexity="4" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="6" elements="10" coveredelements="10"/>
@@ -22,13 +22,12 @@
         <metrics complexity="5" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="17" coveredstatements="17" elements="20" coveredelements="20"/>
       </class>
       <line num="16" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="2"/>
-      <line num="18" type="stmt" count="2"/>
-      <line num="26" type="method" name="validateCountryVatNumber" visibility="public" complexity="1" crap="1" count="2"/>
-      <line num="28" type="stmt" count="2"/>
-      <line num="35" type="method" name="getCountryByCode" visibility="private" complexity="3" crap="3" count="2"/>
-      <line num="38" type="stmt" count="2"/>
+      <line num="19" type="stmt" count="2"/>
+      <line num="27" type="method" name="validateCountryVatNumber" visibility="public" complexity="1" crap="1" count="2"/>
+      <line num="29" type="stmt" count="2"/>
+      <line num="36" type="method" name="getCountryByCode" visibility="private" complexity="3" crap="3" count="2"/>
       <line num="39" type="stmt" count="2"/>
-      <line num="40" type="stmt" count="1"/>
+      <line num="40" type="stmt" count="2"/>
       <line num="41" type="stmt" count="1"/>
       <line num="42" type="stmt" count="1"/>
       <line num="43" type="stmt" count="1"/>
@@ -41,7 +40,8 @@
       <line num="50" type="stmt" count="1"/>
       <line num="51" type="stmt" count="1"/>
       <line num="52" type="stmt" count="1"/>
-      <metrics loc="56" ncloc="47" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="17" coveredstatements="17" elements="20" coveredelements="20"/>
+      <line num="53" type="stmt" count="1"/>
+      <metrics loc="57" ncloc="48" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="17" coveredstatements="17" elements="20" coveredelements="20"/>
     </file>
     <file name="/app/src/exceptions/CountryCodeEmptyException.php">
       <class name="rocketfellows\CountryVatNumberFormatValidator\exceptions\CountryCodeEmptyException" namespace="global">
@@ -95,6 +95,6 @@
       </class>
       <metrics loc="8" ncloc="8" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
     </file>
-    <metrics files="9" loc="196" ncloc="179" classes="4" methods="11" coveredmethods="11" conditionals="0" coveredconditionals="0" statements="29" coveredstatements="29" elements="40" coveredelements="40"/>
+    <metrics files="9" loc="197" ncloc="180" classes="4" methods="11" coveredmethods="11" conditionals="0" coveredconditionals="0" statements="29" coveredstatements="29" elements="40" coveredelements="40"/>
   </project>
 </coverage>
