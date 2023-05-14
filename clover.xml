@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1648587867">
-  <project timestamp="1648587867">
-    <metrics files="0" loc="0" ncloc="0" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+<coverage generated="1684072719">
+  <project timestamp="1684072719">
+    <file name="/app/src/VatNumberFormatValidationResult.php">
+      <class name="rocketfellows\CountryVatNumberFormatValidator\VatNumberFormatValidationResult" namespace="global">
+        <metrics complexity="4" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="6" elements="10" coveredelements="10"/>
+      </class>
+      <line num="16" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="11"/>
+      <line num="21" type="stmt" count="11"/>
+      <line num="22" type="stmt" count="11"/>
+      <line num="23" type="stmt" count="11"/>
+      <line num="26" type="method" name="isValid" visibility="public" complexity="1" crap="1" count="11"/>
+      <line num="28" type="stmt" count="11"/>
+      <line num="34" type="method" name="getPassedValidatorsClasses" visibility="public" complexity="1" crap="1" count="11"/>
+      <line num="36" type="stmt" count="11"/>
+      <line num="39" type="method" name="getSuccessfullyValidatorClass" visibility="public" complexity="1" crap="1" count="7"/>
+      <line num="41" type="stmt" count="7"/>
+      <metrics loc="44" ncloc="36" classes="1" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="6" elements="10" coveredelements="10"/>
+    </file>
+    <metrics files="1" loc="44" ncloc="36" classes="1" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="6" elements="10" coveredelements="10"/>
   </project>
 </coverage>
