@@ -3,6 +3,7 @@
 namespace rocketfellows\CountryVatNumberFormatValidator\tests\unit\exceptions;
 
 use PHPUnit\Framework\TestCase;
+use rocketfellows\CountryVatNumberFormatValidator\exceptions\VatNumberFormatValidatorServiceException;
 use Throwable;
 
 class VatNumberFormatValidatorServiceExceptionTest extends TestCase
