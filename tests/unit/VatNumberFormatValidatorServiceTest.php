@@ -9,4 +9,15 @@ use PHPUnit\Framework\TestCase;
  */
 class VatNumberFormatValidatorServiceTest extends TestCase
 {
+    /**
+     * @var VatNumberFormatValidatorService
+     */
+    private $vatNumberFormatValidatorService;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->vatNumberFormatValidatorService = new VatNumberFormatValidatorService();
+    }
 }
