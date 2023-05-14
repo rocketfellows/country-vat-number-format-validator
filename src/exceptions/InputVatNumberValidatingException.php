@@ -4,7 +4,7 @@ namespace rocketfellows\CountryVatNumberFormatValidator\exceptions;
 
 use Throwable;
 
-class InputVatNumberValidatingException extends VatNumberFormatValidatorServiceException
+abstract class InputVatNumberValidatingException extends VatNumberFormatValidatorServiceException
 {
     private $inputValidatingVatNumber;
 
