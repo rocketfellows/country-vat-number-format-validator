@@ -7,6 +7,9 @@ use PHPUnit\Framework\TestCase;
 use rocketfellows\CountryVatNumberFormatValidator\exceptions\VatNumberFormatValidatorServiceException;
 use Throwable;
 
+/**
+ * @group country-vat-number-format-validator-exceptions
+ */
 class VatNumberFormatValidatorServiceExceptionTest extends TestCase
 {
     public function testVatNumberFormatValidatorServiceExceptionClassImplementation(): void

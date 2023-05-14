@@ -8,6 +8,9 @@ use rocketfellows\CountryVatNumberFormatValidator\exceptions\InputCountryCodeExc
 use rocketfellows\CountryVatNumberFormatValidator\exceptions\VatNumberFormatValidatorServiceException;
 use Throwable;
 
+/**
+ * @group country-vat-number-format-validator-exceptions
+ */
 abstract class InputCountryCodeExceptionTest extends TestCase
 {
     abstract protected function getExceptionWithFullParameters(

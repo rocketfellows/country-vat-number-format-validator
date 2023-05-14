@@ -6,6 +6,9 @@ use rocketfellows\CountryVatNumberFormatValidator\exceptions\CountryCodeEmptyExc
 use rocketfellows\CountryVatNumberFormatValidator\exceptions\InputCountryCodeException;
 use Throwable;
 
+/**
+ * @group country-vat-number-format-validator-exceptions
+ */
 class CountryCodeEmptyExceptionTest extends InputCountryCodeExceptionTest
 {
     protected function getExceptionWithFullParameters(

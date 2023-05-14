@@ -6,6 +6,9 @@ use rocketfellows\CountryVatNumberFormatValidator\exceptions\InputCountryCodeExc
 use rocketfellows\CountryVatNumberFormatValidator\exceptions\UnknownCountryCodeException;
 use Throwable;
 
+/**
+ * @group country-vat-number-format-validator-exceptions
+ */
 class UnknownCountryCodeExceptionTest extends InputCountryCodeExceptionTest
 {
     protected function getExceptionWithFullParameters(string $countryCode, string $message, int $code, ?Throwable $previousException): InputCountryCodeException

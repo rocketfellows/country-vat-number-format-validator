@@ -6,6 +6,9 @@ use rocketfellows\CountryVatNumberFormatValidator\exceptions\InputVatNumberValid
 use rocketfellows\CountryVatNumberFormatValidator\exceptions\VatNumberValidatingException;
 use Throwable;
 
+/**
+ * @group country-vat-number-format-validator-exceptions
+ */
 class VatNumberValidatingExceptionTest extends InputVatNumberValidatingExceptionTest
 {
     protected function getExceptionWithFullParameters(
