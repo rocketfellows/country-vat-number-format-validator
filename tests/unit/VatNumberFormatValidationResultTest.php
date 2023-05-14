@@ -13,6 +13,10 @@ class VatNumberFormatValidationResultTest extends TestCase
                 'isValid' => false,
                 'passedValidatorsClasses' => [],
             ],
+            'is valid true, passed validators classes empty' => [
+                'isValid' => true,
+                'passedValidatorsClasses' => [],
+            ],
         ];
     }
 
