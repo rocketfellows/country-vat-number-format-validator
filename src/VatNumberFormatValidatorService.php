@@ -2,8 +2,12 @@
 
 namespace rocketfellows\CountryVatNumberFormatValidator;
 
+use arslanimamutdinov\ISOStandard3166\Country;
 use rocketfellows\CountryVatNumberFormatValidator\exceptions\CountryCodeEmptyException;
+use rocketfellows\CountryVatNumberFormatValidator\exceptions\UnknownInputCountryCodeException;
 use rocketfellows\ISOStandard3166Factory\CountryFactory;
+use rocketfellows\ISOStandard3166Factory\exceptions\EmptyCountryCodeException;
+use rocketfellows\ISOStandard3166Factory\exceptions\UnknownCountryCodeException;
 
 class VatNumberFormatValidatorService
 {
@@ -17,19 +21,35 @@ class VatNumberFormatValidatorService
     /**
      * TODO: implement
      * @throws CountryCodeEmptyException
+     * @throws UnknownInputCountryCodeException
      */
     public function validateCountryVatNumber(string $countryCode, string $vatNumber): void
     {
-        $this->validateInputCountryCode($countryCode);
+        $country = $this->getCountryByCountryCode($countryCode);
     }
 
     /**
      * @throws CountryCodeEmptyException
+     * @throws UnknownInputCountryCodeException
      */
-    private function validateInputCountryCode(string $countryCode): void
+    private function getCountryByCountryCode(string $countryCode): Country
     {
-        if (empty($countryCode)) {
-            throw new CountryCodeEmptyException($countryCode);
+        try {
+            return $this->countryFactory->createByCode($countryCode);
+        } catch (EmptyCountryCodeException $exception) {
+            throw new CountryCodeEmptyException(
+                $countryCode,
+                $exception->getMessage(),
+                $exception->getCode(),
+                $exception
+            );
+        } catch (UnknownCountryCodeException $exception) {
+            throw new UnknownInputCountryCodeException(
+                $countryCode,
+                $exception->getMessage(),
+                $exception->getCode(),
+                $exception
+            );
         }
     }
 }

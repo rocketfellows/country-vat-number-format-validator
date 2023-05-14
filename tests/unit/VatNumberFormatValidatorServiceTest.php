@@ -9,6 +9,8 @@ use rocketfellows\CountryVatNumberFormatValidator\exceptions\CountryCodeEmptyExc
 use rocketfellows\CountryVatNumberFormatValidator\exceptions\UnknownInputCountryCodeException;
 use rocketfellows\CountryVatNumberFormatValidator\VatNumberFormatValidatorService;
 use rocketfellows\ISOStandard3166Factory\CountryFactory;
+use rocketfellows\ISOStandard3166Factory\exceptions\EmptyCountryCodeException;
+use rocketfellows\ISOStandard3166Factory\exceptions\UnknownCountryCodeException;
 
 /**
  * @group country-vat-number-format-validator-services
@@ -31,13 +33,31 @@ class VatNumberFormatValidatorServiceTest extends TestCase
 
         $this->countryFactory = $this->createMock(CountryFactory::class);
 
-        $this->vatNumberFormatValidatorService = new VatNumberFormatValidatorService();
+        $this->vatNumberFormatValidatorService = new VatNumberFormatValidatorService(
+            $this->countryFactory
+        );
     }
 
     public function testValidatorThrowsExceptionCauseInputCountryCodeEmpty(): void
     {
+        /** @var Exception $factoryEmptyCountryCodeException */
+        $factoryEmptyCountryCodeException = $this->createMock(EmptyCountryCodeException::class);
+
         $this->expectException(CountryCodeEmptyException::class);
-        $this->expectExceptionObject(new CountryCodeEmptyException(''));
+        $this->expectExceptionObject(
+            new CountryCodeEmptyException(
+                '',
+                $factoryEmptyCountryCodeException->getMessage(),
+                $factoryEmptyCountryCodeException->getCode(),
+                $factoryEmptyCountryCodeException
+            )
+        );
+
+        $this->countryFactory
+            ->expects($this->once())
+            ->method('createByCode')
+            ->with('')
+            ->willThrowException($factoryEmptyCountryCodeException);
 
         $this->vatNumberFormatValidatorService->validateCountryVatNumber('', '');
     }
