@@ -6,6 +6,16 @@ use PHPUnit\Framework\TestCase;
 
 class VatNumberFormatValidationResultTest extends TestCase
 {
+    public function getVatNumberFormatValidationResultWithRequiredParamsProvidedData(): array
+    {
+        return [
+            'is valid false, passed validators classes empty' => [
+                'isValid' => false,
+                'passedValidatorsClasses' => [],
+            ],
+        ];
+    }
+
     /**
      * @dataProvider getVatNumberFormatValidationResultProvidedData
      */
