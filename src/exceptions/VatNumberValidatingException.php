@@ -2,6 +2,6 @@
 
 namespace rocketfellows\CountryVatNumberFormatValidator\exceptions;
 
-class VatNumberValidatingException extends InputCountryCodeException
+class VatNumberValidatingException extends InputVatNumberValidatingException
 {
 }
