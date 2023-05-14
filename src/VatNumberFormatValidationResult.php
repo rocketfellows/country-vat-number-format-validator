@@ -8,6 +8,11 @@ class VatNumberFormatValidationResult
     private $passedValidatorsClasses;
     private $successfullyValidatorClass;
 
+    /**
+     * @param bool $isValid
+     * @param string[] $passedValidatorsClasses
+     * @param string|null $successfullyValidatorClass
+     */
     public function __construct(
         bool $isValid,
         array $passedValidatorsClasses,
@@ -21,5 +26,13 @@ class VatNumberFormatValidationResult
     public function isValid(): bool
     {
         return $this->isValid;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getPassedValidatorsClasses(): array
+    {
+        return $this->passedValidatorsClasses;
     }
 }
