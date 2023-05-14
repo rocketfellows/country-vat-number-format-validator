@@ -18,6 +18,45 @@ class VatNumberFormatValidatorServiceExceptionTest extends TestCase
     }
 
     /**
+     * @dataProvider getVatNumberFormatValidatorServiceExceptionWithMessageAndCodeProvidedData
+     */
+    public function testVatNumberFormatValidatorServiceExceptionWithMessageAndCodeSet(
+        string $message,
+        int $code
+    ): void {
+        /** @var Throwable $exception */
+        $exception = $this->getMockForAbstractClass(
+            VatNumberFormatValidatorServiceException::class,
+            [
+                $message,
+                $code
+            ]
+        );
+
+        $this->assertEquals($message, $exception->getMessage());
+        $this->assertEquals($code, $exception->getCode());
+        $this->assertNull($exception->getPrevious());
+    }
+
+    public function getVatNumberFormatValidatorServiceExceptionWithMessageAndCodeProvidedData(): array
+    {
+        return [
+            [
+                'message' => 'foo',
+                'code' => 1,
+            ],
+            [
+                'message' => 'fooBar',
+                'code' => 2,
+            ],
+            [
+                'message' => 'bar',
+                'code' => 0,
+            ],
+        ];
+    }
+
+    /**
      * @dataProvider getVatNumberFormatValidatorServiceExceptionWithOnlyMessageProvidedData
      */
     public function testVatNumberFormatValidatorServiceExceptionWithOnlyMessageSet(
