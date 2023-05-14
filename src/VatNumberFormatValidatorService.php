@@ -3,9 +3,17 @@
 namespace rocketfellows\CountryVatNumberFormatValidator;
 
 use rocketfellows\CountryVatNumberFormatValidator\exceptions\CountryCodeEmptyException;
+use rocketfellows\ISOStandard3166Factory\CountryFactory;
 
 class VatNumberFormatValidatorService
 {
+    private $countryFactory;
+
+    public function __construct(CountryFactory $countryFactory)
+    {
+        $this->countryFactory = $countryFactory;
+    }
+
     /**
      * TODO: implement
      * @throws CountryCodeEmptyException
