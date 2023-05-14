@@ -2,6 +2,7 @@
 
 namespace rocketfellows\CountryVatNumberFormatValidator\tests\unit\exceptions;
 
+use rocketfellows\CountryVatNumberFormatValidator\exceptions\CountryValidatorsNotFoundException;
 use rocketfellows\CountryVatNumberFormatValidator\exceptions\InputCountryCodeException;
 use Throwable;
 
