@@ -35,4 +35,9 @@ class VatNumberFormatValidationResult
     {
         return $this->passedValidatorsClasses;
     }
+
+    public function getSuccessfullyValidatorClass(): ?string
+    {
+        return $this->successfullyValidatorClass;
+    }
 }
