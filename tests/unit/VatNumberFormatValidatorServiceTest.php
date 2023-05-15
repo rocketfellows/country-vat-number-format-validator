@@ -95,22 +95,57 @@ class VatNumberFormatValidatorServiceTest extends TestCase
     public function getValidationResultProvidedData(): array
     {
         return [
-            'all validators returns invalid result' => [
+            '4 validators in config, all validators returns invalid result' => [
                 'countryCode' => self::COUNTRY_CODE_TEST_VALUE,
                 'country' => $this->getCountryMock(['inputCountryCode' => self::COUNTRY_CODE_TEST_VALUE,]),
                 'validators' => new CountryVatFormatValidators(
+                    new CountryInvalidVatFormatValidatorMock(),
+                    new CountryInvalidVatFormatValidatorMock(),
                     new CountryInvalidVatFormatValidatorMock(),
                     new CountryInvalidVatFormatValidatorMock(),
                 ),
                 'expectedValidationResult' => new VatNumberFormatValidationResult(
                     false,
                     [
+                        CountryInvalidVatFormatValidatorMock::class,
+                        CountryInvalidVatFormatValidatorMock::class,
                         CountryInvalidVatFormatValidatorMock::class,
                         CountryInvalidVatFormatValidatorMock::class,
                     ]
                 ),
             ],
-            'first validator returns valid result' => [
+            '10 validators in config, all validators returns invalid result' => [
+                'countryCode' => self::COUNTRY_CODE_TEST_VALUE,
+                'country' => $this->getCountryMock(['inputCountryCode' => self::COUNTRY_CODE_TEST_VALUE,]),
+                'validators' => new CountryVatFormatValidators(
+                    new CountryInvalidVatFormatValidatorMock(),
+                    new CountryInvalidVatFormatValidatorMock(),
+                    new CountryInvalidVatFormatValidatorMock(),
+                    new CountryInvalidVatFormatValidatorMock(),
+                    new CountryInvalidVatFormatValidatorMock(),
+                    new CountryInvalidVatFormatValidatorMock(),
+                    new CountryInvalidVatFormatValidatorMock(),
+                    new CountryInvalidVatFormatValidatorMock(),
+                    new CountryInvalidVatFormatValidatorMock(),
+                    new CountryInvalidVatFormatValidatorMock(),
+                ),
+                'expectedValidationResult' => new VatNumberFormatValidationResult(
+                    false,
+                    [
+                        CountryInvalidVatFormatValidatorMock::class,
+                        CountryInvalidVatFormatValidatorMock::class,
+                        CountryInvalidVatFormatValidatorMock::class,
+                        CountryInvalidVatFormatValidatorMock::class,
+                        CountryInvalidVatFormatValidatorMock::class,
+                        CountryInvalidVatFormatValidatorMock::class,
+                        CountryInvalidVatFormatValidatorMock::class,
+                        CountryInvalidVatFormatValidatorMock::class,
+                        CountryInvalidVatFormatValidatorMock::class,
+                        CountryInvalidVatFormatValidatorMock::class,
+                    ]
+                ),
+            ],
+            '2 validators in config, first validator returns valid result' => [
                 'countryCode' => self::COUNTRY_CODE_TEST_VALUE,
                 'country' => $this->getCountryMock(['inputCountryCode' => self::COUNTRY_CODE_TEST_VALUE,]),
                 'validators' => new CountryVatFormatValidators(
@@ -118,14 +153,14 @@ class VatNumberFormatValidatorServiceTest extends TestCase
                     new CountryInvalidVatFormatValidatorMock(),
                 ),
                 'expectedValidationResult' => new VatNumberFormatValidationResult(
-                    false,
+                    true,
                     [
                         CountryValidVatFormatValidatorMock::class,
                     ],
                     CountryValidVatFormatValidatorMock::class
                 ),
             ],
-            'second validator returns valid result' => [
+            '2 validators in config, second validator returns valid result' => [
                 'countryCode' => self::COUNTRY_CODE_TEST_VALUE,
                 'country' => $this->getCountryMock(['inputCountryCode' => self::COUNTRY_CODE_TEST_VALUE,]),
                 'validators' => new CountryVatFormatValidators(
@@ -133,7 +168,7 @@ class VatNumberFormatValidatorServiceTest extends TestCase
                     new CountryValidVatFormatValidatorMock(),
                 ),
                 'expectedValidationResult' => new VatNumberFormatValidationResult(
-                    false,
+                    true,
                     [
                         CountryInvalidVatFormatValidatorMock::class,
                         CountryValidVatFormatValidatorMock::class,
@@ -141,7 +176,7 @@ class VatNumberFormatValidatorServiceTest extends TestCase
                     CountryValidVatFormatValidatorMock::class
                 ),
             ],
-            'third validator returns valid result' => [
+            '3 validators in config, third validator returns valid result' => [
                 'countryCode' => self::COUNTRY_CODE_TEST_VALUE,
                 'country' => $this->getCountryMock(['inputCountryCode' => self::COUNTRY_CODE_TEST_VALUE,]),
                 'validators' => new CountryVatFormatValidators(
@@ -150,8 +185,67 @@ class VatNumberFormatValidatorServiceTest extends TestCase
                     new CountryValidVatFormatValidatorMock(),
                 ),
                 'expectedValidationResult' => new VatNumberFormatValidationResult(
-                    false,
+                    true,
                     [
+                        CountryInvalidVatFormatValidatorMock::class,
+                        CountryInvalidVatFormatValidatorMock::class,
+                        CountryValidVatFormatValidatorMock::class,
+                    ],
+                    CountryValidVatFormatValidatorMock::class
+                ),
+            ],
+            '10 validators in config, last validator returns valid result' => [
+                'countryCode' => self::COUNTRY_CODE_TEST_VALUE,
+                'country' => $this->getCountryMock(['inputCountryCode' => self::COUNTRY_CODE_TEST_VALUE,]),
+                'validators' => new CountryVatFormatValidators(
+                    new CountryInvalidVatFormatValidatorMock(),
+                    new CountryInvalidVatFormatValidatorMock(),
+                    new CountryInvalidVatFormatValidatorMock(),
+                    new CountryInvalidVatFormatValidatorMock(),
+                    new CountryInvalidVatFormatValidatorMock(),
+                    new CountryInvalidVatFormatValidatorMock(),
+                    new CountryInvalidVatFormatValidatorMock(),
+                    new CountryInvalidVatFormatValidatorMock(),
+                    new CountryInvalidVatFormatValidatorMock(),
+                    new CountryValidVatFormatValidatorMock(),
+                ),
+                'expectedValidationResult' => new VatNumberFormatValidationResult(
+                    true,
+                    [
+                        CountryInvalidVatFormatValidatorMock::class,
+                        CountryInvalidVatFormatValidatorMock::class,
+                        CountryInvalidVatFormatValidatorMock::class,
+                        CountryInvalidVatFormatValidatorMock::class,
+                        CountryInvalidVatFormatValidatorMock::class,
+                        CountryInvalidVatFormatValidatorMock::class,
+                        CountryInvalidVatFormatValidatorMock::class,
+                        CountryInvalidVatFormatValidatorMock::class,
+                        CountryInvalidVatFormatValidatorMock::class,
+                        CountryValidVatFormatValidatorMock::class,
+                    ],
+                    CountryValidVatFormatValidatorMock::class
+                ),
+            ],
+            '10 validators in config, 5th validator returns valid result' => [
+                'countryCode' => self::COUNTRY_CODE_TEST_VALUE,
+                'country' => $this->getCountryMock(['inputCountryCode' => self::COUNTRY_CODE_TEST_VALUE,]),
+                'validators' => new CountryVatFormatValidators(
+                    new CountryInvalidVatFormatValidatorMock(),
+                    new CountryInvalidVatFormatValidatorMock(),
+                    new CountryInvalidVatFormatValidatorMock(),
+                    new CountryInvalidVatFormatValidatorMock(),
+                    new CountryValidVatFormatValidatorMock(),
+                    new CountryInvalidVatFormatValidatorMock(),
+                    new CountryInvalidVatFormatValidatorMock(),
+                    new CountryInvalidVatFormatValidatorMock(),
+                    new CountryInvalidVatFormatValidatorMock(),
+                    new CountryInvalidVatFormatValidatorMock(),
+                ),
+                'expectedValidationResult' => new VatNumberFormatValidationResult(
+                    true,
+                    [
+                        CountryInvalidVatFormatValidatorMock::class,
+                        CountryInvalidVatFormatValidatorMock::class,
                         CountryInvalidVatFormatValidatorMock::class,
                         CountryInvalidVatFormatValidatorMock::class,
                         CountryValidVatFormatValidatorMock::class,
