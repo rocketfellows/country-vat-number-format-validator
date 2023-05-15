@@ -23,13 +23,17 @@ class VatNumberFormatValidationResult
         $this->successfullyValidatorClass = $successfullyValidatorClass;
     }
 
-    public static function createInvalidResult($passedValidatorsClasses, ?string $successfullyValidatorClass): self
-    {
+    public static function createInvalidResult(
+        $passedValidatorsClasses,
+        ?string $successfullyValidatorClass = null
+    ): self {
         return new self(false, $passedValidatorsClasses, $successfullyValidatorClass);
     }
 
-    public static function createValidResult($passedValidatorsClasses, ?string $successfullyValidatorClass): self
-    {
+    public static function createValidResult(
+        $passedValidatorsClasses,
+        ?string $successfullyValidatorClass = null
+    ): self {
         return new self(true, $passedValidatorsClasses, $successfullyValidatorClass);
     }
 
