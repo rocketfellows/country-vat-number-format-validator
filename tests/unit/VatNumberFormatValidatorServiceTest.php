@@ -121,7 +121,7 @@ class VatNumberFormatValidatorServiceTest extends TestCase
         $this->countryVatNumberFormatValidatorsConfigs
             ->expects($this->once())
             ->method('getCountryValidators')
-            ->willReturn(new CountryVatFormatValidators());
+            ->willReturn(new CountryVatFormatValidators(...[]));
 
         $this->expectException(CountryValidatorsNotFoundException::class);
         $this->expectExceptionObject(new CountryValidatorsNotFoundException(self::COUNTRY_CODE_TEST_VALUE));
