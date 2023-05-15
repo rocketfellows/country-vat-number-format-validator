@@ -35,14 +35,24 @@ class VatNumberFormatValidatorService
      * @throws CountryValidatorsNotFoundException
      * @throws VatNumberValidatingException
      */
-    public function validateCountryVatNumber(string $countryCode, string $vatNumber): void
+    public function validateCountryVatNumber(string $countryCode, string $vatNumber): VatNumberFormatValidationResult
     {
         $country = $this->getCountryByCode($countryCode);
         $validators = $this->getCountryVatNumberFormatValidators($country);
 
+        $passedValidatorsClasses = [];
         foreach ($validators as $validator) {
-            $this->isValidVatNumber($validator, $vatNumber);
+            $passedValidatorsClasses[] = get_class($validator);
+            $isValid = $this->isValidVatNumber($validator, $vatNumber);
+
+            if (!$isValid) {
+                continue;
+            }
+
+            return new VatNumberFormatValidationResult(true, $passedValidatorsClasses, get_class($validator));
         }
+
+        return new VatNumberFormatValidationResult(false, $passedValidatorsClasses);
     }
 
     /**
