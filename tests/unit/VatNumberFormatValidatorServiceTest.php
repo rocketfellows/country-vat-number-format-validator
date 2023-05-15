@@ -17,6 +17,8 @@ use rocketfellows\ISOStandard3166Factory\exceptions\UnknownCountryCodeException;
  */
 class VatNumberFormatValidatorServiceTest extends TestCase
 {
+    private const COUNTRY_CODE_TEST_VALUE = 'foo';
+
     /**
      * @var VatNumberFormatValidatorService
      */
@@ -75,14 +77,13 @@ class VatNumberFormatValidatorServiceTest extends TestCase
 
     public function testValidatorThrowsExceptionCauseInputCountryCodeUnknown(): void
     {
-        $unknownInputCountryCode = 'foo';
         /** @var Exception $factoryUnknownCountryCodeException */
         $factoryUnknownCountryCodeException = $this->createMock(UnknownCountryCodeException::class);
 
         $this->expectException(UnknownInputCountryCodeException::class);
         $this->expectExceptionObject(
             new UnknownInputCountryCodeException(
-                $unknownInputCountryCode,
+                self::COUNTRY_CODE_TEST_VALUE,
                 $factoryUnknownCountryCodeException->getMessage(),
                 $factoryUnknownCountryCodeException->getCode(),
                 $factoryUnknownCountryCodeException
@@ -92,9 +93,9 @@ class VatNumberFormatValidatorServiceTest extends TestCase
         $this->countryFactory
             ->expects($this->once())
             ->method('createByCode')
-            ->with($unknownInputCountryCode)
+            ->with(self::COUNTRY_CODE_TEST_VALUE)
             ->willThrowException($factoryUnknownCountryCodeException);
 
-        $this->vatNumberFormatValidatorService->validateCountryVatNumber($unknownInputCountryCode, '');
+        $this->vatNumberFormatValidatorService->validateCountryVatNumber(self::COUNTRY_CODE_TEST_VALUE, '');
     }
 }
