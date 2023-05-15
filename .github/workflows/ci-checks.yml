@@ -28,7 +28,7 @@ jobs:
       - uses: php-actions/composer@v6
       - uses: php-actions/phpunit@v3
         with:
-          version: 8.5.33
+          version: 9.5.28
           bootstrap: vendor/autoload.php
           configuration: phpunit.xml
           args: --coverage-text
