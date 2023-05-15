@@ -118,10 +118,11 @@ class VatNumberFormatValidatorServiceTest extends TestCase
             ->method('createByCode')
             ->with(self::COUNTRY_CODE_TEST_VALUE)
             ->willReturn($country);
+
         $this->countryVatNumberFormatValidatorsConfigs
             ->expects($this->once())
             ->method('getCountryValidators')
-            ->willReturn(new CountryVatFormatValidators(...[]));
+            ->willReturn($this->getCountryVatFormatValidatorsMock(['isEmpty' => true,]));
 
         $this->expectException(CountryValidatorsNotFoundException::class);
         $this->expectExceptionObject(new CountryValidatorsNotFoundException(self::COUNTRY_CODE_TEST_VALUE));
@@ -130,6 +131,14 @@ class VatNumberFormatValidatorServiceTest extends TestCase
             self::COUNTRY_CODE_TEST_VALUE,
             self::VAT_NUMBER_TEST_VALUE
         );
+    }
+
+    private function getCountryVatFormatValidatorsMock(array $params = []): MockObject
+    {
+        $mock = $this->createMock(CountryVatFormatValidators::class);
+        $mock->method('isEmpty')->willReturn($params['isEmpty'] ?? true);
+
+        return $mock;
     }
 
     private function getCountryMock(array $params = []): MockObject
