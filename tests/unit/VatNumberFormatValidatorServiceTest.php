@@ -95,6 +95,19 @@ class VatNumberFormatValidatorServiceTest extends TestCase
     public function getValidationResultProvidedData(): array
     {
         return [
+            'one validator in config and returns invalid result' => [
+                'countryCode' => self::COUNTRY_CODE_TEST_VALUE,
+                'country' => $this->getCountryMock(['inputCountryCode' => self::COUNTRY_CODE_TEST_VALUE,]),
+                'validators' => new CountryVatFormatValidators(
+                    new CountryInvalidVatFormatValidatorMock(),
+                ),
+                'expectedValidationResult' => new VatNumberFormatValidationResult(
+                    false,
+                    [
+                        CountryInvalidVatFormatValidatorMock::class,
+                    ]
+                ),
+            ],
             '4 validators in config, all validators returns invalid result' => [
                 'countryCode' => self::COUNTRY_CODE_TEST_VALUE,
                 'country' => $this->getCountryMock(['inputCountryCode' => self::COUNTRY_CODE_TEST_VALUE,]),
