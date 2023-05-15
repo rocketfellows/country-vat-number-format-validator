@@ -37,8 +37,7 @@ class VatNumberFormatValidatorService
      */
     public function validateCountryVatNumber(string $countryCode, string $vatNumber): VatNumberFormatValidationResult
     {
-        $country = $this->getCountryByCode($countryCode);
-        $validators = $this->getCountryVatNumberFormatValidators($country);
+        $validators = $this->getCountryVatNumberFormatValidators($this->getCountryByCode($countryCode));
 
         $passedValidatorsClasses = [];
         foreach ($validators as $validator) {
