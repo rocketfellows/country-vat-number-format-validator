@@ -23,6 +23,11 @@ class VatNumberFormatValidatorServiceTest extends TestCase
     private $vatNumberFormatValidatorService;
 
     /**
+     * @var CountryVatNumberFormatValidatorsConfigs|MockObject
+     */
+    private $countryVatNumberFormatValidatorsConfigs;
+
+    /**
      * @var CountryFactory|MockObject
      */
     private $countryFactory;
@@ -31,9 +36,15 @@ class VatNumberFormatValidatorServiceTest extends TestCase
     {
         parent::setUp();
 
-        $this->countryFactory = $this->createMock(CountryFactory::class);
+        $this->countryVatNumberFormatValidatorsConfigs = $this->createMock(
+            CountryVatNumberFormatValidatorsConfigs::class
+        );
+        $this->countryFactory = $this->createMock(
+            CountryFactory::class
+        );
 
         $this->vatNumberFormatValidatorService = new VatNumberFormatValidatorService(
+            $this->countryVatNumberFormatValidatorsConfigs,
             $this->countryFactory
         );
     }
