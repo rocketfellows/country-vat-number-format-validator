@@ -2,10 +2,12 @@
 
 namespace rocketfellows\CountryVatNumberFormatValidator\tests\unit;
 
+use arslanimamutdinov\ISOStandard3166\Country;
 use Exception;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use rocketfellows\CountryVatNumberFormatValidator\exceptions\CountryCodeEmptyException;
+use rocketfellows\CountryVatNumberFormatValidator\exceptions\CountryValidatorsNotFoundException;
 use rocketfellows\CountryVatNumberFormatValidator\exceptions\UnknownInputCountryCodeException;
 use rocketfellows\CountryVatNumberFormatValidator\VatNumberFormatValidatorService;
 use rocketfellows\ISOStandard3166Factory\CountryFactory;
@@ -104,5 +106,38 @@ class VatNumberFormatValidatorServiceTest extends TestCase
             self::COUNTRY_CODE_TEST_VALUE,
             self::VAT_NUMBER_TEST_VALUE
         );
+    }
+
+    public function testValidatorThrowsExceptionCauseCountryValidatorNotFound(): void
+    {
+        $country = $this->getCountryMock();
+        $this->countryFactory
+            ->expects($this->once())
+            ->method('createByCode')
+            ->with(self::COUNTRY_CODE_TEST_VALUE)
+            ->willReturn($country);
+        $this->countryVatNumberFormatValidatorsConfigs
+            ->expects($this->once())
+            ->method('getCountryValidators')
+            ->willReturn(new CountryVatFormatValidators());
+
+        $this->expectException(CountryValidatorsNotFoundException::class);
+        $this->expectExceptionObject(new CountryValidatorsNotFoundException(self::COUNTRY_CODE_TEST_VALUE));
+
+        $this->vatNumberFormatValidatorService->validateCountryVatNumber(
+            self::COUNTRY_CODE_TEST_VALUE,
+            self::VAT_NUMBER_TEST_VALUE
+        );
+    }
+
+    /**
+     * @return Country|MockObject
+     */
+    private function getCountryMock(): Country
+    {
+        /** @var Country|MockObject $mock */
+        $mock = $this->createMock(Country::class);
+
+        return $mock;
     }
 }
