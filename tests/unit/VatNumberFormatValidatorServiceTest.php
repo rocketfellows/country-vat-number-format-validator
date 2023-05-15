@@ -110,7 +110,7 @@ class VatNumberFormatValidatorServiceTest extends TestCase
         );
     }
 
-    public function testValidatorThrowsExceptionCauseCountryValidatorNotFound(): void
+    public function testValidatorThrowsExceptionCauseCountryValidatorsNotFound(): void
     {
         $country = $this->getCountryMock(['inputCountryCode' => self::COUNTRY_CODE_TEST_VALUE]);
         $this->countryFactory
