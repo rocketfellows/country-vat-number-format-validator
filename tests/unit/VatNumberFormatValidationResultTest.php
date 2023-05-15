@@ -19,7 +19,6 @@ class VatNumberFormatValidationResultTest extends TestCase
             $successfullyValidatorClass
         );
 
-        $this->assertInstanceOf(VatNumberFormatValidationResult::class, $validationResult);
         $this->assertFalse($validationResult->isValid());
         $this->assertEquals($passedValidatorsClasses, $validationResult->getPassedValidatorsClasses());
         $this->assertEquals($successfullyValidatorClass, $validationResult->getSuccessfullyValidatorClass());
@@ -37,7 +36,6 @@ class VatNumberFormatValidationResultTest extends TestCase
             $successfullyValidatorClass
         );
 
-        $this->assertInstanceOf(VatNumberFormatValidationResult::class, $validationResult);
         $this->assertTrue($validationResult->isValid());
         $this->assertEquals($passedValidatorsClasses, $validationResult->getPassedValidatorsClasses());
         $this->assertEquals($successfullyValidatorClass, $validationResult->getSuccessfullyValidatorClass());
