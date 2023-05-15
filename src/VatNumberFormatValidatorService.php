@@ -5,17 +5,21 @@ namespace rocketfellows\CountryVatNumberFormatValidator;
 use arslanimamutdinov\ISOStandard3166\Country;
 use rocketfellows\CountryVatNumberFormatValidator\exceptions\CountryCodeEmptyException;
 use rocketfellows\CountryVatNumberFormatValidator\exceptions\UnknownInputCountryCodeException;
+use rocketfellows\CountryVatNumberFormatValidatorsConfig\CountryVatNumberFormatValidatorsConfigs;
 use rocketfellows\ISOStandard3166Factory\CountryFactory;
 use rocketfellows\ISOStandard3166Factory\exceptions\EmptyCountryCodeException;
 use rocketfellows\ISOStandard3166Factory\exceptions\UnknownCountryCodeException;
 
 class VatNumberFormatValidatorService
 {
+    private $countryVatNumberFormatValidatorsConfigs;
     private $countryFactory;
 
     public function __construct(
+        CountryVatNumberFormatValidatorsConfigs $countryVatNumberFormatValidatorsConfigs,
         CountryFactory $countryFactory
     ) {
+        $this->countryVatNumberFormatValidatorsConfigs = $countryVatNumberFormatValidatorsConfigs;
         $this->countryFactory = $countryFactory;
     }
 
