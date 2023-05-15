@@ -8,6 +8,62 @@ use rocketfellows\CountryVatNumberFormatValidator\VatNumberFormatValidationResul
 class VatNumberFormatValidationResultTest extends TestCase
 {
     /**
+     * @dataProvider getDefaultValidationResultProvidedData
+     */
+    public function testCreateInvalidValidationResult(
+        array $passedValidatorsClasses,
+        ?string $successfullyValidatorClass
+    ): void {
+        $validationResult = VatNumberFormatValidationResult::createInvalidResult(
+            $passedValidatorsClasses,
+            $successfullyValidatorClass
+        );
+
+        $this->assertFalse($validationResult->isValid());
+        $this->assertEquals($passedValidatorsClasses, $validationResult->getPassedValidatorsClasses());
+        $this->assertEquals($successfullyValidatorClass, $validationResult->getSuccessfullyValidatorClass());
+    }
+
+    /**
+     * @dataProvider getDefaultValidationResultProvidedData
+     */
+    public function testCreateValidValidationResult(
+        array $passedValidatorsClasses,
+        ?string $successfullyValidatorClass
+    ): void {
+        $validationResult = VatNumberFormatValidationResult::createValidResult(
+            $passedValidatorsClasses,
+            $successfullyValidatorClass
+        );
+
+        $this->assertTrue($validationResult->isValid());
+        $this->assertEquals($passedValidatorsClasses, $validationResult->getPassedValidatorsClasses());
+        $this->assertEquals($successfullyValidatorClass, $validationResult->getSuccessfullyValidatorClass());
+    }
+
+    public function getDefaultValidationResultProvidedData(): array
+    {
+        return [
+            'passed validators classes empty, successfully validator class not set' => [
+                'passedValidatorsClasses' => [],
+                'successfullyValidatorClass' => null,
+            ],
+            'passed validators classes not empty, successfully validator class not set' => [
+                'passedValidatorsClasses' => ['foo', 'bar',],
+                'successfullyValidatorClass' => null,
+            ],
+            'passed validators classes empty, successfully validator class set' => [
+                'passedValidatorsClasses' => [],
+                'successfullyValidatorClass' => 'fooBar',
+            ],
+            'passed validators classes not empty, successfully validator class set' => [
+                'passedValidatorsClasses' => ['foo', 'bar',],
+                'successfullyValidatorClass' => 'fooBar',
+            ],
+        ];
+    }
+
+    /**
      * @dataProvider getVatNumberFormatValidationResultWithRequiredParamsProvidedData
      */
     public function testInitVatNumberFormatValidationResultWithRequiredParams(
