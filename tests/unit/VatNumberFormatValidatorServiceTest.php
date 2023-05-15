@@ -110,7 +110,7 @@ class VatNumberFormatValidatorServiceTest extends TestCase
 
     public function testValidatorThrowsExceptionCauseCountryValidatorNotFound(): void
     {
-        $country = $this->getCountryMock();
+        $country = $this->getCountryMock(['inputCountryCode' => self::COUNTRY_CODE_TEST_VALUE]);
         $this->countryFactory
             ->expects($this->once())
             ->method('createByCode')
@@ -133,10 +133,11 @@ class VatNumberFormatValidatorServiceTest extends TestCase
     /**
      * @return Country|MockObject
      */
-    private function getCountryMock(): Country
+    private function getCountryMock(array $params = []): Country
     {
         /** @var Country|MockObject $mock */
         $mock = $this->createMock(Country::class);
+        $mock->method('getAlpha2')->willReturn($params['inputCountryCode'] ?? '');
 
         return $mock;
     }
