@@ -3,7 +3,9 @@
 namespace rocketfellows\CountryVatNumberFormatValidator;
 
 use arslanimamutdinov\ISOStandard3166\Country;
+use rocketfellows\CountryVatFormatValidatorInterface\CountryVatFormatValidators;
 use rocketfellows\CountryVatNumberFormatValidator\exceptions\CountryCodeEmptyException;
+use rocketfellows\CountryVatNumberFormatValidator\exceptions\CountryValidatorsNotFoundException;
 use rocketfellows\CountryVatNumberFormatValidator\exceptions\UnknownInputCountryCodeException;
 use rocketfellows\CountryVatNumberFormatValidatorsConfig\CountryVatNumberFormatValidatorsConfigs;
 use rocketfellows\ISOStandard3166Factory\CountryFactory;
@@ -27,10 +29,12 @@ class VatNumberFormatValidatorService
      * TODO: implement
      * @throws CountryCodeEmptyException
      * @throws UnknownInputCountryCodeException
+     * @throws CountryValidatorsNotFoundException
      */
     public function validateCountryVatNumber(string $countryCode, string $vatNumber): void
     {
         $country = $this->getCountryByCode($countryCode);
+        $validators = $this->getCountryVatNumberFormatValidators($country);
     }
 
     /**
@@ -56,5 +60,19 @@ class VatNumberFormatValidatorService
                 $exception
             );
         }
+    }
+
+    /**
+     * @throws CountryValidatorsNotFoundException
+     */
+    private function getCountryVatNumberFormatValidators(Country $country): CountryVatFormatValidators
+    {
+        $validators = $this->countryVatNumberFormatValidatorsConfigs->getCountryValidators($country);
+
+        if ($validators->isEmpty()) {
+            throw new CountryValidatorsNotFoundException($country->getAlpha2());
+        }
+
+        return $validators;
     }
 }
