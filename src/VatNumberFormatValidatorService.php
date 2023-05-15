@@ -47,10 +47,10 @@ class VatNumberFormatValidatorService
                 continue;
             }
 
-            return new VatNumberFormatValidationResult(true, $passedValidatorsClasses, get_class($validator));
+            return VatNumberFormatValidationResult::createValidResult($passedValidatorsClasses, get_class($validator));
         }
 
-        return new VatNumberFormatValidationResult(false, $passedValidatorsClasses);
+        return VatNumberFormatValidationResult::createInvalidResult($passedValidatorsClasses);
     }
 
     /**
