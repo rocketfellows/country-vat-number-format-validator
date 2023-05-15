@@ -42,9 +42,8 @@ class VatNumberFormatValidatorService
         $passedValidatorsClasses = [];
         foreach ($validators as $validator) {
             $passedValidatorsClasses[] = get_class($validator);
-            $isValid = $this->isValidVatNumber($validator, $vatNumber);
 
-            if (!$isValid) {
+            if (!$this->isValidVatNumber($validator, $vatNumber)) {
                 continue;
             }
 
