@@ -34,7 +34,7 @@ class VatNumberFormatValidatorService
     public function validateCountryVatNumber(string $countryCode, string $vatNumber): void
     {
         $country = $this->getCountryByCode($countryCode);
-        $validators = $this->getCountryVatNumberFormatValidators($country);
+        $this->getCountryVatNumberFormatValidators($country);
     }
 
     /**
@@ -65,14 +65,12 @@ class VatNumberFormatValidatorService
     /**
      * @throws CountryValidatorsNotFoundException
      */
-    private function getCountryVatNumberFormatValidators(Country $country): CountryVatFormatValidators
+    private function getCountryVatNumberFormatValidators(Country $country): void
     {
         $validators = $this->countryVatNumberFormatValidatorsConfigs->getCountryValidators($country);
 
         if ($validators->isEmpty()) {
             throw new CountryValidatorsNotFoundException($country->getAlpha2());
         }
-
-        return $validators;
     }
 }
