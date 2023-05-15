@@ -16,6 +16,12 @@
         </report>
     </coverage>
 
+    <logging>
+        <log type="coverage-html" target="tests/_output/coverage.html/" lowUpperBound="35" highLowerBound="70"/>
+        <log type="coverage-clover" target="tests/_output/coverage.xml"/>
+        <log type="coverage-php" target="tests/_output/coverage.serialized"/>
+        <log type="coverage-text" target="php://stdout" showUncoveredFiles="false"/>
+    </logging>
     <testsuites>
         <testsuite name="default">
             <directory>./tests/unit</directory>
