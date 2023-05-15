@@ -13,6 +13,9 @@ use rocketfellows\CountryVatNumberFormatValidator\exceptions\CountryCodeEmptyExc
 use rocketfellows\CountryVatNumberFormatValidator\exceptions\CountryValidatorsNotFoundException;
 use rocketfellows\CountryVatNumberFormatValidator\exceptions\UnknownInputCountryCodeException;
 use rocketfellows\CountryVatNumberFormatValidator\exceptions\VatNumberValidatingException;
+use rocketfellows\CountryVatNumberFormatValidator\tests\unit\mocks\CountryInvalidVatFormatValidatorMock;
+use rocketfellows\CountryVatNumberFormatValidator\tests\unit\mocks\CountryValidVatFormatValidatorMock;
+use rocketfellows\CountryVatNumberFormatValidator\VatNumberFormatValidationResult;
 use rocketfellows\CountryVatNumberFormatValidator\VatNumberFormatValidatorService;
 use rocketfellows\CountryVatNumberFormatValidatorsConfig\CountryVatNumberFormatValidatorsConfigs;
 use rocketfellows\ISOStandard3166Factory\CountryFactory;
@@ -57,6 +60,106 @@ class VatNumberFormatValidatorServiceTest extends TestCase
             $this->countryVatNumberFormatValidatorsConfigs,
             $this->countryFactory
         );
+    }
+
+    /**
+     * @dataProvider getValidationResultProvidedData
+     */
+    public function testValidationResult(
+        string $countryCode,
+        MockObject $country,
+        CountryVatFormatValidators $validators,
+        VatNumberFormatValidationResult $expectedValidationResult
+    ): void {
+        $this->countryFactory
+            ->expects($this->once())
+            ->method('createByCode')
+            ->with(self::COUNTRY_CODE_TEST_VALUE)
+            ->willReturn($country);
+
+        $this->countryVatNumberFormatValidatorsConfigs
+            ->expects($this->once())
+            ->method('getCountryValidators')
+            ->with($country)
+            ->willReturn($validators);
+
+        $this->assertEquals(
+            $expectedValidationResult,
+            $this->vatNumberFormatValidatorService->validateCountryVatNumber(
+                $countryCode,
+                self::VAT_NUMBER_TEST_VALUE
+            )
+        );
+    }
+
+    public function getValidationResultProvidedData(): array
+    {
+        return [
+            'all validators returns invalid result' => [
+                'countryCode' => self::COUNTRY_CODE_TEST_VALUE,
+                'country' => $this->getCountryMock(['inputCountryCode' => self::COUNTRY_CODE_TEST_VALUE,]),
+                'validators' => new CountryVatFormatValidators(
+                    new CountryInvalidVatFormatValidatorMock(),
+                    new CountryInvalidVatFormatValidatorMock(),
+                ),
+                'expectedValidationResult' => new VatNumberFormatValidationResult(
+                    false,
+                    [
+                        CountryInvalidVatFormatValidatorMock::class,
+                        CountryInvalidVatFormatValidatorMock::class,
+                    ]
+                ),
+            ],
+            'first validator returns valid result' => [
+                'countryCode' => self::COUNTRY_CODE_TEST_VALUE,
+                'country' => $this->getCountryMock(['inputCountryCode' => self::COUNTRY_CODE_TEST_VALUE,]),
+                'validators' => new CountryVatFormatValidators(
+                    new CountryValidVatFormatValidatorMock(),
+                    new CountryInvalidVatFormatValidatorMock(),
+                ),
+                'expectedValidationResult' => new VatNumberFormatValidationResult(
+                    false,
+                    [
+                        CountryValidVatFormatValidatorMock::class,
+                    ],
+                    CountryValidVatFormatValidatorMock::class
+                ),
+            ],
+            'second validator returns valid result' => [
+                'countryCode' => self::COUNTRY_CODE_TEST_VALUE,
+                'country' => $this->getCountryMock(['inputCountryCode' => self::COUNTRY_CODE_TEST_VALUE,]),
+                'validators' => new CountryVatFormatValidators(
+                    new CountryInvalidVatFormatValidatorMock(),
+                    new CountryValidVatFormatValidatorMock(),
+                ),
+                'expectedValidationResult' => new VatNumberFormatValidationResult(
+                    false,
+                    [
+                        CountryInvalidVatFormatValidatorMock::class,
+                        CountryValidVatFormatValidatorMock::class,
+                    ],
+                    CountryValidVatFormatValidatorMock::class
+                ),
+            ],
+            'third validator returns valid result' => [
+                'countryCode' => self::COUNTRY_CODE_TEST_VALUE,
+                'country' => $this->getCountryMock(['inputCountryCode' => self::COUNTRY_CODE_TEST_VALUE,]),
+                'validators' => new CountryVatFormatValidators(
+                    new CountryInvalidVatFormatValidatorMock(),
+                    new CountryInvalidVatFormatValidatorMock(),
+                    new CountryValidVatFormatValidatorMock(),
+                ),
+                'expectedValidationResult' => new VatNumberFormatValidationResult(
+                    false,
+                    [
+                        CountryInvalidVatFormatValidatorMock::class,
+                        CountryInvalidVatFormatValidatorMock::class,
+                        CountryValidVatFormatValidatorMock::class,
+                    ],
+                    CountryValidVatFormatValidatorMock::class
+                ),
+            ],
+        ];
     }
 
     public function testValidatorThrowsExceptionCauseInputCountryCodeEmpty(): void
