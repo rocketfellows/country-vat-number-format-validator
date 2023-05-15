@@ -132,10 +132,7 @@ class VatNumberFormatValidatorServiceTest extends TestCase
         );
     }
 
-    /**
-     * @return Country|MockObject
-     */
-    private function getCountryMock(array $params = []): Country
+    private function getCountryMock(array $params = []): MockObject
     {
         /** @var Country|MockObject $mock */
         $mock = $this->createMock(Country::class);
