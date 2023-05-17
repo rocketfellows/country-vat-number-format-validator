@@ -4,3 +4,8 @@
 
 The package provides configurable services for validating country vat number formats.
 
+## Installation
+
+```shell
+composer require rocketfellows/country-vat-number-format-validator
+```
