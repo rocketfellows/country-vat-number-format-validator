@@ -81,10 +81,47 @@ Return value is instance of **_rocketfellows\CountryVatNumberFormatValidator\Vat
 
 ## Usage example of preconfigured validators for countries
 
-To use the preconfigured validators for a country, you need to install the appropriate package from the list above.
+To use the preconfigured validators for a country, you need to install the appropriate package from the list above from section "References".
 
-TODO
-
+Example of instantiating **_VatNumberFormatValidatorService_**:
+```php
+$validatorService = new VatNumberFormatValidatorService(
+    new CountryVatNumberFormatValidatorsConfigs(
+        new SKVatNumberFormatValidatorsConfig(),
+        new SIVatNumberFormatValidatorsConfig(),
+        new SEVatNumberFormatValidatorsConfig(),
+        new RUVatNumberFormatValidatorsConfig(),
+        new ROVatNumberFormatValidatorsConfig(),
+        new PTVatNumberFormatValidatorsConfig(),
+        new PLVatNumberFormatValidatorsConfig(),
+        new NOVatNumberFormatValidatorsConfig(),
+        new NLVatNumberFormatValidatorsConfig(),
+        new MTVatNumberFormatValidatorsConfig(),
+        new LVVatNumberFormatValidatorsConfig(),
+        new LUVatNumberFormatValidatorsConfig(),
+        new LTVatNumberFormatValidatorsConfig(),
+        new ITVatNumberFormatValidatorsConfig(),
+        new IEVatNumberFormatValidatorsConfig(),
+        new HUVatNumberFormatValidatorsConfig(),
+        new HRVatNumberFormatValidatorsConfig(),
+        new GRVatNumberFormatValidatorsConfig(),
+        new GBVatNumberFormatValidatorsConfig(),
+        new FRVatNumberFormatValidatorsConfig(),
+        new FIVatNumberFormatValidatorsConfig(),
+        new ESVatNumberFormatValidatorsConfig(),
+        new EEVatNumberFormatValidatorsConfig(),
+        new DKVatNumberFormatValidatorsConfig(),
+        new DEVatNumberFormatValidatorsConfig(),
+        new CZVatNumberFormatValidatorsConfig(),
+        new CYVatNumberFormatValidatorsConfig(),
+        new CHEVatNumberFormatValidatorsConfig(),
+        new BGVatNumberFormatValidatorsConfig(),
+        new BEVatNumberFormatValidatorsConfig(),
+        new ATVatNumberFormatValidatorsConfig()
+    ),
+    new CountryFactory()
+);
+```
 
 ## Contributing
 
