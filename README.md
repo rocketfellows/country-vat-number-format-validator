@@ -123,6 +123,33 @@ $validatorService = new VatNumberFormatValidatorService(
 );
 ```
 
+Below сountry vat number format is valid examples.
+
+Austria vat number:
+
+```php
+$result = $validatorService->validateCountryVatNumber('at', 'ATU62181819');
+
+var_dump($result);
+```
+
+Validation result:
+
+```php
+class rocketfellows\CountryVatNumberFormatValidator\VatNumberFormatValidationResult#101 (3) {
+  private $isValid =>
+  bool(true)
+  private $passedValidatorsClasses =>
+  array(1) {
+    [0] =>
+    string(55) "rocketfellows\ATVatFormatValidator\ATVatFormatValidator"
+  }
+  private $successfullyValidatorClass =>
+  string(55) "rocketfellows\ATVatFormatValidator\ATVatFormatValidator"
+}
+
+```
+
 ## Contributing
 
 Welcome to pull requests. If there is a major changes, first please open an issue for discussion.
