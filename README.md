@@ -1,21 +1,21 @@
-# Configurable country vat number format validator
+# Configurable country vat number format validator.
 
 ![Code Coverage Badge](./badge.svg)
 
 The package provides configurable services for validating country vat number formats.
 
-## Installation
+## Installation.
 
 ```shell
 composer require rocketfellows/country-vat-number-format-validator
 ```
 
-## Dependencies
+## Dependencies.
 
 - https://github.com/rocketfellows/iso-standard-3166-factory v1.0.0
 - https://github.com/rocketfellows/country-vat-number-format-validators-config v1.0.0
 
-## References
+## References.
 
 The packages below can be connected to the validator right away
 because they contain preconfigured validators for the following countries:
@@ -52,7 +52,7 @@ because they contain preconfigured validators for the following countries:
 - https://github.com/rocketfellows/be-vat-number-format-validators-config - Belgium;
 - https://github.com/rocketfellows/at-vat-number-format-validators-config - Austria;
 
-## Interface for validating country vat number format
+## Interface for validating country vat number format.
 
 Service for checking the vat number format for the country:
 **_rocketfellows\CountryVatNumberFormatValidator\VatNumberFormatValidatorService_**
@@ -79,7 +79,7 @@ Return value is instance of **_rocketfellows\CountryVatNumberFormatValidator\Vat
 - **_getPassedValidatorsClasses_** - returns array of classes (array of string), which was passed during validation process;
 - **_getSuccessfullyValidatorClass_** - if vat number is valid for given country, returns validator class which succeed validation;
 
-## Usage example of preconfigured validators for countries
+## Usage example of preconfigured validators for countries.
 
 To use the preconfigured validators for a country, you need to install the appropriate package from the list above from section "References".
 
@@ -125,7 +125,7 @@ $validatorService = new VatNumberFormatValidatorService(
 
 ### Valid country vat number format examples.
 
-#### Austria vat number
+#### Austria vat number.
 
 ```php
 // country code case-insensitive
@@ -150,7 +150,7 @@ class rocketfellows\CountryVatNumberFormatValidator\VatNumberFormatValidationRes
 }
 ```
 
-#### Germany vat number
+#### Germany vat number.
 
 ```php
 // country code case-insensitive
@@ -175,7 +175,7 @@ class rocketfellows\CountryVatNumberFormatValidator\VatNumberFormatValidationRes
 }
 ```
 
-## Contributing
+## Contributing.
 
 Welcome to pull requests. If there is a major changes, first please open an issue for discussion.
 
