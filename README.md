@@ -123,11 +123,12 @@ $validatorService = new VatNumberFormatValidatorService(
 );
 ```
 
-Below сountry vat number format is valid examples.
+### Valid country vat number format examples.
 
-Austria vat number:
+#### Austria vat number
 
 ```php
+// country code case-insensitive
 $result = $validatorService->validateCountryVatNumber('at', 'ATU62181819');
 
 var_dump($result);
@@ -147,7 +148,31 @@ class rocketfellows\CountryVatNumberFormatValidator\VatNumberFormatValidationRes
   private $successfullyValidatorClass =>
   string(55) "rocketfellows\ATVatFormatValidator\ATVatFormatValidator"
 }
+```
 
+#### Germany vat number
+
+```php
+// country code case-insensitive
+$result = $validatorService->validateCountryVatNumber('de', 'DE282308599');
+
+var_dump($result);
+```
+
+Validation result:
+
+```php
+class rocketfellows\CountryVatNumberFormatValidator\VatNumberFormatValidationResult#101 (3) {
+  private $isValid =>
+  bool(true)
+  private $passedValidatorsClasses =>
+  array(1) {
+    [0] =>
+    string(55) "rocketfellows\DEVatFormatValidator\DEVatFormatValidator"
+  }
+  private $successfullyValidatorClass =>
+  string(55) "rocketfellows\DEVatFormatValidator\DEVatFormatValidator"
+}
 ```
 
 ## Contributing
