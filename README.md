@@ -175,6 +175,33 @@ class rocketfellows\CountryVatNumberFormatValidator\VatNumberFormatValidationRes
 }
 ```
 
+### Invalid country vat number format examples.
+
+#### Austria vat number.
+
+```php
+// country code case-insensitive
+$result = $validatorService->validateCountryVatNumber('at', 'foo');
+
+var_dump($result);
+```
+
+Validation result:
+
+```php
+class rocketfellows\CountryVatNumberFormatValidator\VatNumberFormatValidationResult#99 (3) {
+  private $isValid =>
+  bool(false)
+  private $passedValidatorsClasses =>
+  array(1) {
+    [0] =>
+    string(55) "rocketfellows\ATVatFormatValidator\ATVatFormatValidator"
+  }
+  private $successfullyValidatorClass =>
+  NULL
+}
+```
+
 ## Contributing.
 
 Welcome to pull requests. If there is a major changes, first please open an issue for discussion.
