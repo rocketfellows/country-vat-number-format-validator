@@ -58,6 +58,27 @@ class VatNumberFormatValidatorTest extends TestCase
         );
     }
 
+    public function testCountryVatNumberIsNotValid(): void
+    {
+        $validationResult = $this->getVatNumberFormatValidationResultMock();
+        $validationResult
+            ->expects($this->once())
+            ->method('isValid')
+            ->willReturn(false);
+
+        $this->vatNumberFormatValidatorService
+            ->expects($this->once())
+            ->method('validateCountryVatNumber')
+            ->willReturn($validationResult);
+
+        $this->assertFalse(
+            $this->vatNumberFormatValidator->isValid(
+                self::COUNTRY_CODE_TEST_VALUE,
+                self::VAT_NUMBER_TEST_VALUE
+            )
+        );
+    }
+
     private function getVatNumberFormatValidationResultMock(): MockObject
     {
         /** @var VatNumberFormatValidationResult|MockObject $mock */
