@@ -12,8 +12,8 @@ composer require rocketfellows/country-vat-number-format-validator
 
 ## Dependencies.
 
-- https://github.com/rocketfellows/iso-standard-3166-factory v1.0.0
-- https://github.com/rocketfellows/country-vat-number-format-validators-config v1.0.0
+- https://github.com/rocketfellows/iso-standard-3166-factory v1.0.0;
+- https://github.com/rocketfellows/country-vat-number-format-validators-config v1.0.0;
 
 ## References.
 
@@ -84,6 +84,7 @@ Return value is instance of **_rocketfellows\CountryVatNumberFormatValidator\Vat
 To use the preconfigured validators for a country, you need to install the appropriate package from the list above from section "References".
 
 Example of instantiating **_VatNumberFormatValidatorService_**:
+
 ```php
 $validatorService = new VatNumberFormatValidatorService(
     new CountryVatNumberFormatValidatorsConfigs(
@@ -136,7 +137,7 @@ var_dump($result);
 
 Validation result:
 
-```php
+```shell
 class rocketfellows\CountryVatNumberFormatValidator\VatNumberFormatValidationResult#101 (3) {
   private $isValid =>
   bool(true)
@@ -161,7 +162,7 @@ var_dump($result);
 
 Validation result:
 
-```php
+```shell
 class rocketfellows\CountryVatNumberFormatValidator\VatNumberFormatValidationResult#101 (3) {
   private $isValid =>
   bool(true)
@@ -188,7 +189,7 @@ var_dump($result);
 
 Validation result:
 
-```php
+```shell
 class rocketfellows\CountryVatNumberFormatValidator\VatNumberFormatValidationResult#99 (3) {
   private $isValid =>
   bool(false)
@@ -213,7 +214,7 @@ var_dump($result);
 
 Validation result:
 
-```php
+```shell
 class rocketfellows\CountryVatNumberFormatValidator\VatNumberFormatValidationResult#99 (3) {
   private $isValid =>
   bool(false)
@@ -242,7 +243,7 @@ Throwable exceptions:
 - **_rocketfellows\CountryVatNumberFormatValidator\exceptions\CountryValidatorsNotFoundException_** - when service not found validator for given country;
 - **_rocketfellows\CountryVatNumberFormatValidator\exceptions\VatNumberValidatingException_** - when found validator for country throws any exception in process;
 
-### VatNumberFormatValidator configuration example
+### VatNumberFormatValidator configuration example.
 
 ```php
 $validator = new VatNumberFormatValidator(
@@ -285,7 +286,7 @@ $validator = new VatNumberFormatValidator(
 );
 ```
 
-### VatNumberFormatValidator usage examples
+### VatNumberFormatValidator usage examples.
 
 Austria valid vat number validation:
 
@@ -295,6 +296,7 @@ var_dump($result);
 ```
 
 Validation result:
+
 ```shell
 bool(true)
 ```
@@ -311,6 +313,141 @@ Validation result:
 ```shell
 bool(false)
 ```
+
+## Expandability.
+
+If you need to expand the list of countries whose vat numbers you want to check, you will need to do the following:
+- implement a validator for the vat number of the required country - a class that implements the rocketfellows\CountryVatFormatValidatorInterface\CountryVatFormatValidatorInterface interface;
+- connect the validator with the country through a class that implements the interface rocketfellows\CountryVatNumberFormatValidatorsConfig\CountryVatNumberFormatValidatorsConfigInterface;
+- connect the config linking the country with the validator to the tuple rocketfellows\CountryVatNumberFormatValidatorsConfig\CountryVatNumberFormatValidatorsConfigs;
+
+### Example
+
+Suppose we need to add a vat number validator for the country Qatar.
+
+First we need to implement the vat number validator for the country - a class that implements the interface rocketfellows\CountryVatFormatValidatorInterface\CountryVatFormatValidatorInterface.
+
+For simplicity, let's assume that a valid vat number is a string that contains only numbers and consists of three characters.
+
+To implement the validator interface, we use the prepared abstract class rocketfellows\CountryVatFormatValidatorInterface\CountryVatFormatValidator.
+
+Validator implementation:
+
+```php
+namespace rocketfellows\CountryVatNumberFormatValidator\qa;
+
+use rocketfellows\CountryVatFormatValidatorInterface\CountryVatFormatValidator;
+
+class QAVatFormatValidator extends CountryVatFormatValidator
+{
+    private const VAT_NUMBER_PATTERN = '/^\d{3}$/';
+
+    protected function isValidFormat(string $vatNumber): bool
+    {
+        return (bool) preg_match(self::VAT_NUMBER_PATTERN, $vatNumber);
+    }
+}
+```
+
+Next, you need to associate the validator with the country through the configurator class.
+Class must implement rocketfellows\CountryVatNumberFormatValidatorsConfig\CountryVatNumberFormatValidatorsConfigInterface.
+
+Config class:
+
+```php
+namespace rocketfellows\CountryVatNumberFormatValidator\qa;
+
+use arslanimamutdinov\ISOStandard3166\Country;
+use arslanimamutdinov\ISOStandard3166\ISO3166;
+use rocketfellows\CountryVatFormatValidatorInterface\CountryVatFormatValidatorInterface;
+use rocketfellows\CountryVatFormatValidatorInterface\CountryVatFormatValidators;
+use rocketfellows\CountryVatNumberFormatValidatorsConfig\CountryVatNumberFormatValidatorsConfigInterface;
+
+class QAVatNumberFormatValidatorsConfig implements CountryVatNumberFormatValidatorsConfigInterface
+{
+    private $validators;
+    
+    public function __construct(CountryVatFormatValidatorInterface $validator)
+    {
+        $this->validators = new CountryVatFormatValidators($validator);
+    }
+
+    public function getCountry(): Country
+    {
+        return ISO3166::QA();
+    }
+
+    public function getValidators(): CountryVatFormatValidators
+    {
+        return $this->validators;
+    }
+}
+```
+
+And that's almost all, we just need to connect the new configuration to the service rocketfellows\CountryVatNumberFormatValidator\VatNumberFormatValidatorService.
+
+VatNumberFormatValidatorService configuration:
+
+```php
+$validatorService = new VatNumberFormatValidatorService(
+    new CountryVatNumberFormatValidatorsConfigs(
+        new QAVatNumberFormatValidatorsConfig(new QAVatFormatValidator()),
+        new ATVatNumberFormatValidatorsConfig(),
+        new DEVatNumberFormatValidatorsConfig()
+    ),
+    new CountryFactory()
+);
+```
+
+As you can see, in addition to the vat validators for Austria and Germany, we have included a validator for the country Qatar.
+
+An example of a valid vat number for the country Qatar from our example:
+
+```php
+$result = $validatorService->validateCountryVatNumber('qa', '123');
+var_dump($result);
+```
+
+Result:
+
+```shell
+class rocketfellows\CountryVatNumberFormatValidator\VatNumberFormatValidationResult#17 (3) {
+  private $isValid =>
+  bool(true)
+  private $passedValidatorsClasses =>
+  array(1) {
+    [0] =>
+    string(69) "rocketfellows\CountryVatNumberFormatValidator\qa\QAVatFormatValidator"
+  }
+  private $successfullyValidatorClass =>
+  string(69) "rocketfellows\CountryVatNumberFormatValidator\qa\QAVatFormatValidator"
+}
+```
+
+An example of an invalid vat number for the country Qatar from our example:
+
+```php
+$result = $validatorService->validateCountryVatNumber('qa', 'foo');
+var_dump($result);
+```
+
+Result:
+
+```shell
+class rocketfellows\CountryVatNumberFormatValidator\VatNumberFormatValidationResult#15 (3) {
+  private $isValid =>
+  bool(false)
+  private $passedValidatorsClasses =>
+  array(1) {
+    [0] =>
+    string(69) "rocketfellows\CountryVatNumberFormatValidator\qa\QAVatFormatValidator"
+  }
+  private $successfullyValidatorClass =>
+  NULL
+}
+```
+
+As you can see it works great.
 
 ## Contributing.
 
