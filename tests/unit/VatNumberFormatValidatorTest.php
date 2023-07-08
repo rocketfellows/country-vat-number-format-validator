@@ -53,6 +53,10 @@ class VatNumberFormatValidatorTest extends TestCase
         $this->vatNumberFormatValidatorService
             ->expects($this->once())
             ->method('validateCountryVatNumber')
+            ->with(
+                self::COUNTRY_CODE_TEST_VALUE,
+                self::VAT_NUMBER_TEST_VALUE
+            )
             ->willReturn($validationResult);
 
         $this->assertTrue(
@@ -74,6 +78,10 @@ class VatNumberFormatValidatorTest extends TestCase
         $this->vatNumberFormatValidatorService
             ->expects($this->once())
             ->method('validateCountryVatNumber')
+            ->with(
+                self::COUNTRY_CODE_TEST_VALUE,
+                self::VAT_NUMBER_TEST_VALUE
+            )
             ->willReturn($validationResult);
 
         $this->assertFalse(
