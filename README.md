@@ -227,6 +227,91 @@ class rocketfellows\CountryVatNumberFormatValidator\VatNumberFormatValidationRes
 }
 ```
 
+## VatNumberFormatValidator.
+
+In case you don't need the details of the validation process of the country vat number format, but just want to get the answer "vat number is valid or not", you can use the rocketfellows\CountryVatNumberFormatValidator\VatNumberFormatValidator.
+
+Class methods:
+- isValid - takes country code and vat number as arguments and returns boolean value.
+
+**_VatNumberFormatValidator_** takes an object of type **_VatNumberFormatValidatorService_** as a dependency, which you must configure in advance.
+
+Throwable exceptions:
+- **_rocketfellows\CountryVatNumberFormatValidator\exceptions\CountryCodeEmptyException_** - when **_countryCode_** is empty string;
+- **_rocketfellows\CountryVatNumberFormatValidator\exceptions\UnknownInputCountryCodeException_** - when **_CountryFactory_** cant find country according to given **_countryCode_**;
+- **_rocketfellows\CountryVatNumberFormatValidator\exceptions\CountryValidatorsNotFoundException_** - when service not found validator for given country;
+- **_rocketfellows\CountryVatNumberFormatValidator\exceptions\VatNumberValidatingException_** - when found validator for country throws any exception in process;
+
+### VatNumberFormatValidator configuration example
+
+```php
+$validator = new VatNumberFormatValidator(
+    new VatNumberFormatValidatorService(
+        new CountryVatNumberFormatValidatorsConfigs(
+            new SKVatNumberFormatValidatorsConfig(),
+            new SIVatNumberFormatValidatorsConfig(),
+            new SEVatNumberFormatValidatorsConfig(),
+            new RUVatNumberFormatValidatorsConfig(),
+            new ROVatNumberFormatValidatorsConfig(),
+            new PTVatNumberFormatValidatorsConfig(),
+            new PLVatNumberFormatValidatorsConfig(),
+            new NOVatNumberFormatValidatorsConfig(),
+            new NLVatNumberFormatValidatorsConfig(),
+            new MTVatNumberFormatValidatorsConfig(),
+            new LVVatNumberFormatValidatorsConfig(),
+            new LUVatNumberFormatValidatorsConfig(),
+            new LTVatNumberFormatValidatorsConfig(),
+            new ITVatNumberFormatValidatorsConfig(),
+            new IEVatNumberFormatValidatorsConfig(),
+            new HUVatNumberFormatValidatorsConfig(),
+            new HRVatNumberFormatValidatorsConfig(),
+            new GRVatNumberFormatValidatorsConfig(),
+            new GBVatNumberFormatValidatorsConfig(),
+            new FRVatNumberFormatValidatorsConfig(),
+            new FIVatNumberFormatValidatorsConfig(),
+            new ESVatNumberFormatValidatorsConfig(),
+            new EEVatNumberFormatValidatorsConfig(),
+            new DKVatNumberFormatValidatorsConfig(),
+            new DEVatNumberFormatValidatorsConfig(),
+            new CZVatNumberFormatValidatorsConfig(),
+            new CYVatNumberFormatValidatorsConfig(),
+            new CHEVatNumberFormatValidatorsConfig(),
+            new BGVatNumberFormatValidatorsConfig(),
+            new BEVatNumberFormatValidatorsConfig(),
+            new ATVatNumberFormatValidatorsConfig()
+        ),
+        new CountryFactory()
+    )
+);
+```
+
+### VatNumberFormatValidator usage examples
+
+Austria valid vat number validation:
+
+```php
+$result = $validator->isValid('at', 'ATU62181819');
+var_dump($result);
+```
+
+Validation result:
+```shell
+bool(true)
+```
+
+Austria invalid vat number validation:
+
+```php
+$result = $validator->isValid('at', 'ATU61819');
+var_dump($result);
+```
+
+Validation result:
+
+```shell
+bool(false)
+```
+
 ## Contributing.
 
 Welcome to pull requests. If there is a major changes, first please open an issue for discussion.
